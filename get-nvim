@@ -1,0 +1,29 @@
+#!/bin/bash
+
+# Set default to stable
+URL="https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.tar.gz"
+
+# Parse arguments
+if [[ "$1" == "--canary" ]]; then
+  URL="https://github.com/neovim/neovim/releases/download/nightly/nvim-linux-x86_64.tar.gz"
+elif [[ "$1" != "--stable" && -n "$1" ]]; then
+  echo "Error: Invalid flag '$1'"
+  echo "Usage: $0 [--stable | --canary]"
+  exit 1
+fi
+
+# Download and install Neovim
+cd ~/Downloads || exit
+curl -LO "$URL"
+rm -rf ~/.nvim
+tar -xzf nvim-linux-x86_64.tar.gz
+mv ~/Downloads/nvim-linux-x86_64 ~/.nvim
+rm ~/Downloads/nvim-linux-x86_64.tar.gz
+
+echo ""
+echo "Neovim installed successfully."
+echo ""
+echo "Add this line to .bashrc file to access nvim from anywhere:"
+echo ""
+echo 'export PATH="$PATH:$HOME/.nvim/bin"'
+echo ""
