@@ -13,7 +13,7 @@ elif [[ "$1" != "--stable" && -n "$1" ]]; then
 fi
 
 # Download and install Neovim
-cd ~/Downloads || exit
+cd ~/Downloads
 curl -LO "$URL"
 rm -rf ~/.nvim
 tar -xzf nvim-linux-x86_64.tar.gz
